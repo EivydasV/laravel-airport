@@ -36,6 +36,15 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('country.index') }}">Countries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('airline.index') }}">Airlines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('airport.index') }}">Airports</a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

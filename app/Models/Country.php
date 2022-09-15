@@ -9,4 +9,8 @@ class Country extends Model
 {
     use HasFactory;
     protected $fillable = ['country', 'code'];
+
+    public function airlines(){
+        return $this->hasMany(Airline::class);
+    }
 }

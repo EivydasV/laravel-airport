@@ -1,27 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Countries</h3>
+    <h3>Airlines</h3>
     <div class="container d-flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('country.create')}}">Add country</a>
+        <a class="btn btn-primary" href="{{route('airline.create')}}">Add Airlines</a>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">name</th>
             <th scope="col">country</th>
-            <th scope="col">code</th>
             <th scope="col">actions</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach($countries as $country)
+        @foreach($airlines as $airline)
             <tr>
-                <th scope="row">{{$country->id}}</th>
-                <td>{{$country->country}}</td>
-                <td>{{$country->code}}</td>
+                <th scope="row">{{$airline->id}}</th>
+                <td>{{$airline->name}}</td>
+                <td>{{$airline->country->country}}</td>
                 <td>
-                    <form method="POST" action="{{route('country.destroy', $country->id)}}">
+                    <form method="POST" action="{{route('airline.destroy', $airline->id)}}">
                         @method('DELETE')
                         @csrf
                         <div class="form-group">
@@ -40,6 +41,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center">
-        {{$countries->links()}}
+        {{$airlines->links()}}
     </div>
 @endsection

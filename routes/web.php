@@ -18,6 +18,9 @@ Route::get('/', function () {
 });
 
 Route::resource('country', \App\Http\Controllers\CountryController::class);
+Route::resource('airline', \App\Http\Controllers\AirlineController::class);
+Route::resource('airport', \App\Http\Controllers\AirportController::class);
+
 
 Auth::routes();
 

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCountriesRequest;
+use App\Http\Requests\Countries\StoreCountriesRequest;
+use App\Http\Services\CountryService;
 use App\Models\Country;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class CountryController extends Controller
 {
+    public function __construct(private CountryService $countryService)
+    {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,37 +19,36 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::paginate(15);
+        $countries = Country::paginate(10);
         return view('web.country.index', compact('countries'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-
+        $countriesAllData = $this->countryService->getAllCountries();
+        $countries = collect($countriesAllData)->map(function ($country) {
+            return $country['name']['common'];
+        });
+        return view('web.country.create', compact('countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param StoreCountriesRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreCountriesRequest $request)
     {
         $validated = $request->validated();
-
-        $countryRequest = Http::get('https://restcountries.com/v3.1/name/'. $request->country);
-        if($countryRequest->failed()){
-            return response()->json(['message' => $countryRequest->reason()], $countryRequest->status());
-        }
-        $jsonRes = $countryRequest->json();
-        $country = Country::create(['country' => $validated['country'], 'code' => $jsonRes[0]['cca2']]);
-        return response()->json(['message' => $country], 201);
+        $httpCountry = $this->countryService->getCountryByName($validated['country']);
+        Country::create(['country' => $validated['country'], 'code' => $httpCountry['cca2']]);
+        return redirect()->route('country.index');
     }
 
     /**

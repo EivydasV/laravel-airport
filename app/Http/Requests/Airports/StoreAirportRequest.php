@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Airports;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCountriesRequest extends FormRequest
+class StoreAirportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class StoreCountriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'country' => ['required', 'unique:countries']
+            'title' => ['required'],
+            'longitude' => ['required', 'numeric'],
+            'latitude' => ['required', 'numeric'],
+            'airline_id' => [''],
+            'country_id' => ['']
         ];
     }
 }

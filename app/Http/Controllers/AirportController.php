@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airport;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AirportController extends Controller
@@ -10,11 +11,12 @@ class AirportController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $airports = Airport::paginate(15);
+        return view('web.airport.index', compact('airports'));
     }
 
     /**
@@ -24,7 +26,8 @@ class AirportController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::all();
+        return view('web.airport.create', compact('countries'));
     }
 
     /**
@@ -80,6 +83,6 @@ class AirportController extends Controller
      */
     public function destroy(Airport $airport)
     {
-        //
+        $airport->delete();
     }
 }

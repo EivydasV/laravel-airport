@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('airports', function (Blueprint $table) {
             $table->id();
-            $table->string('tile');
-            $table->string('country');
+            $table->string('title');
+            $table->foreignId('country_id')->constrained();
             $table->double('latitude');
             $table->double('longitude');
-            $table->foreignId('airline_id')->constrained();
             $table->timestamps();
         });
     }

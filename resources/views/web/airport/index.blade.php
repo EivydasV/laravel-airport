@@ -1,27 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Countries</h3>
+    <h3>Airports</h3>
     <div class="container d-flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('country.create')}}">Add country</a>
+        <a class="btn btn-primary" href="{{route('airport.create')}}">Add Airport</a>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">title</th>
             <th scope="col">country</th>
-            <th scope="col">code</th>
+            <th scope="col">latitude</th>
+            <th scope="col">longitude</th>
             <th scope="col">actions</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($countries as $country)
+        @foreach($airports as $airport)
             <tr>
-                <th scope="row">{{$country->id}}</th>
-                <td>{{$country->country}}</td>
-                <td>{{$country->code}}</td>
+                <th scope="row">{{$airport->id}}</th>
+                <td>{{$airport->country->id}}</td>
+                <td>{{$airport->latitude}}</td>
+                <td>{{$airport->longitude}}</td>
                 <td>
-                    <form method="POST" action="{{route('country.destroy', $country->id)}}">
+                    <form method="POST" action="{{route('$airport.destroy', $airport->id)}}">
                         @method('DELETE')
                         @csrf
                         <div class="form-group">
@@ -40,6 +43,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center">
-        {{$countries->links()}}
+        {{$airports->links()}}
     </div>
 @endsection

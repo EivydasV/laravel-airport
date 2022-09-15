@@ -9,7 +9,11 @@ class Airline extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'country_id'];
     public function airport(){
-        $this->belongsTo(Airport::class);
+        return $this->belongsTo(Airport::class);
+    }
+    public function country(){
+        return $this->belongsTo(Country::class);
     }
 }
