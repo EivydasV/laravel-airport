@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Airports\StoreAirportRequest;
 use App\Models\Airport;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -36,9 +37,13 @@ class AirportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAirportRequest $request)
     {
-        //
+
+        $validated = $request->validated();
+        $country = Country::where('country', $validated['country'])->firstOrfail();
+        $country->airport()->create($request->validated());
+        return redirect()->route('airport.index');
     }
 
     /**
@@ -84,5 +89,6 @@ class AirportController extends Controller
     public function destroy(Airport $airport)
     {
         $airport->delete();
+        return redirect()->back();
     }
 }

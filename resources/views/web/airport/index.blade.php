@@ -20,11 +20,12 @@
         @foreach($airports as $airport)
             <tr>
                 <th scope="row">{{$airport->id}}</th>
-                <td>{{$airport->country->id}}</td>
+                <td>{{$airport->title}}</td>
+                <td>{{$airport->country->country}}</td>
                 <td>{{$airport->latitude}}</td>
                 <td>{{$airport->longitude}}</td>
                 <td>
-                    <form method="POST" action="{{route('$airport.destroy', $airport->id)}}">
+                    <form method="POST" action="{{route('airport.destroy', $airport->id)}}">
                         @method('DELETE')
                         @csrf
                         <div class="form-group">

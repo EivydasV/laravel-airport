@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('country');
 });
 
 Route::resource('country', \App\Http\Controllers\CountryController::class);

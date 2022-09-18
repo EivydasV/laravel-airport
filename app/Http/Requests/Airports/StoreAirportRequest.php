@@ -27,8 +27,7 @@ class StoreAirportRequest extends FormRequest
             'title' => ['required'],
             'longitude' => ['required', 'numeric'],
             'latitude' => ['required', 'numeric'],
-            'airline_id' => [''],
-            'country_id' => ['']
+            'country' => [''],
         ];
     }
 }
