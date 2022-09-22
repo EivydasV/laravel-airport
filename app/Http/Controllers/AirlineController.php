@@ -56,22 +56,23 @@ class AirlineController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Airline $airline
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Airline $airline)
     {
-        //
+        return view('web.airline.show', compact('airline'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Airline $airline
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Airline $airline)
     {
-        //
+        $countries = Country::all();
+        return view('web.airline.edit', compact('airline', 'countries'));
     }
 
     /**
@@ -79,11 +80,12 @@ class AirlineController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Airline $airline
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Airline $airline)
     {
-        //
+        $airline->update($request->all());
+        return redirect()->route('airline.index');
     }
 
     /**

@@ -1,31 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Airports</h3>
+    <h3>Airlines</h3>
     <div class="container d-flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('airport.create')}}">Add Airport</a>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">title</th>
+            <th scope="col">name</th>
             <th scope="col">country</th>
-            <th scope="col">latitude</th>
-            <th scope="col">longitude</th>
             <th scope="col">actions</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach($airports as $airport)
             <tr>
-                <th scope="row">{{$airport->id}}</th>
-                <td>{{$airport->title}}</td>
-                <td>{{$airport->country->country}}</td>
-                <td>{{$airport->latitude}}</td>
-                <td>{{$airport->longitude}}</td>
+                <th scope="row">{{$airline->id}}</th>
+                <td>{{$airline->name}}</td>
+                <td>{{$airline->country->country}}</td>
                 <td class="d-flex">
-                    <form method="POST" action="{{route('airport.destroy', $airport->id)}}" class="mx-1">
+                    <form method="POST" action="{{route('airline.destroy', $airline->id)}}" class="mx-1">
                         @method('DELETE')
                         @csrf
                         <div class="form-group">
@@ -38,7 +33,7 @@
                             </button>
                         </div>
                     </form>
-                    <form method="GET" action="{{route('airport.edit', $airport->id)}}">
+                    <form method="GET" action="{{route('airline.edit', $airline->id)}}">
                         @csrf
                         <div class="form-group">
                             <button class="btn btn-secondary" type="submit">
@@ -50,10 +45,6 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
-        {{$airports->links()}}
-    </div>
 @endsection

@@ -61,11 +61,12 @@ class AirportController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Airport $airport)
     {
-        //
+        $countries = Country::all();
+        return view('web.airport.edit', compact('airport', 'countries'));
     }
 
     /**
@@ -73,18 +74,19 @@ class AirportController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Airport $airport)
     {
-        //
+        $airport->update($request->all());
+        return redirect()->route('airport.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Airport $airport)
     {
