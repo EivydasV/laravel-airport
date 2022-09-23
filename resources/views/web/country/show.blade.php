@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Countries</h3>
-    <div class="container d-flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('country.create')}}">Add country</a>
-    </div>
+    <h3>Country</h3>
     <table class="table">
         <thead>
         <tr>
@@ -15,13 +12,12 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($countries as $country)
             <tr>
                 <th scope="row">{{$country->id}}</th>
                 <td>{{$country->country}}</td>
                 <td>{{$country->code}}</td>
-                <td class="d-flex">
-                    <form method="POST" action="{{route('country.destroy', $country->id)}}" class="mx-1">
+                <td>
+                    <form method="POST" action="{{route('country.destroy', $country->id)}}">
                         @method('DELETE')
                         @csrf
                         <div class="form-group">
@@ -34,17 +30,8 @@
                             </button>
                         </div>
                     </form>
-                    <a href="{{route('country.show', $country->id)}}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                        </svg>
-                    </a>
                 </td>
             </tr>
-        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
-        {{$countries->links()}}
-    </div>
 @endsection

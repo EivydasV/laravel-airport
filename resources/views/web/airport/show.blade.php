@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Airports</h3>
-    <div class="container d-flex justify-content-end">
-        <a class="btn btn-primary" href="{{route('airport.create')}}">Add Airport</a>
-    </div>
+    <h3>Airport</h3>
     <table class="table">
         <thead>
         <tr>
@@ -17,7 +14,6 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($airports as $airport)
             <tr>
                 <th scope="row">{{$airport->id}}</th>
                 <td>{{$airport->title}}</td>
@@ -38,7 +34,7 @@
                             </button>
                         </div>
                     </form>
-                    <form method="GET" action="{{route('airport.edit', $airport->id)}}" class="mx-1">
+                    <form method="GET" action="{{route('airport.edit', $airport->id)}}">
                         @csrf
                         <div class="form-group">
                             <button class="btn btn-secondary" type="submit">
@@ -48,17 +44,8 @@
                             </button>
                         </div>
                     </form>
-                    <a href="{{route('airport.show', $airport->id)}}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                        </svg>
-                    </a>
                 </td>
             </tr>
-        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
-        {{$airports->links()}}
-    </div>
 @endsection

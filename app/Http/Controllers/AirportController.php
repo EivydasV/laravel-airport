@@ -35,7 +35,7 @@ class AirportController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAirportRequest $request)
     {
@@ -50,11 +50,11 @@ class AirportController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Airport $airport)
     {
-        //
+        return view('web.airport.show', compact('airport'));
     }
 
     /**
@@ -91,6 +91,6 @@ class AirportController extends Controller
     public function destroy(Airport $airport)
     {
         $airport->delete();
-        return redirect()->back();
+        return redirect()->route('airport.index');
     }
 }

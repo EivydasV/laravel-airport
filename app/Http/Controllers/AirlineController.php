@@ -92,11 +92,11 @@ class AirlineController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Airline $airline
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Airline $airline)
     {
         $airline->delete();
-        return redirect()->back();
+        return redirect()->route('airline.index');
     }
 }

@@ -55,11 +55,11 @@ class CountryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Country  $country
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Country $country)
     {
-        //
+        return view('web.country.show', compact('country'));
     }
 
     /**
@@ -94,6 +94,6 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         $country->delete();
-        return redirect()->back();
+        return redirect()->route('country.index');
     }
 }

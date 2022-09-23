@@ -17,9 +17,9 @@ Route::get('/', function () {
     return redirect('country');
 });
 
-Route::resource('country', \App\Http\Controllers\CountryController::class);
-Route::resource('airline', \App\Http\Controllers\AirlineController::class);
-Route::resource('airport', \App\Http\Controllers\AirportController::class);
+Route::resource('country', \App\Http\Controllers\CountryController::class)->middleware('auth');
+Route::resource('airline', \App\Http\Controllers\AirlineController::class)->middleware('auth');
+Route::resource('airport', \App\Http\Controllers\AirportController::class)->middleware('auth');
 
 
 Auth::routes();
